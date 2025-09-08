@@ -1,17 +1,7 @@
-# blog-vue3
+# blog
 
-vue3 + ts + vite2 搭建的博客项目
+nuxt3 + inspira ui
 
-### 一些配置上的变化
+我计划重构我的博客网站，尝试使用功能更全面的 nuxt 来构建，尽量不带着“写一个后台管理系统”的想法来做，那些业务开发中常见的插件按需使用，同时借助 inspira ui 来实现一些比较炫酷的功能。争取完成一个可用的 1.0 版本。
 
-- ~~element plus~~ `naive-ui`
-
-  naive-ui 的风格更令我感到愉悦
-
-- 新增 `tailwindcss`
-
-  原子化 css 能使我的开发更节省时间，尤其是在页面布局略微复杂的时候
-
-- ~~vuex~~ `pinia`
-
-  pinia 简洁的多，不再需要花大量的时间去编写导入、调用函数以及嵌套 modules 等
+分支[vue3](https://github.com/nolandcheng/blog/tree/vue3)停留在了 0.2 版本，1.0 版本上线后再删除。
