@@ -1,0 +1,38 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "nuxt build",
+			"type": "shell",
+			"command": "bun run build",
+			"problemMatcher": [
+				"$eslint-stylish"
+			],
+			"group": "build"
+		},
+		{
+			"label": "nuxt build (verify)",
+			"type": "shell",
+			"command": "bun run build",
+			"problemMatcher": [
+				"$eslint-stylish"
+			],
+			"group": "build"
+		},
+		{
+			"label": "nuxt build (final verify)",
+			"type": "shell",
+			"command": "bun run build",
+			"problemMatcher": [
+				"$eslint-stylish"
+			],
+			"group": "build"
+		},
+		{
+			"label": "remove old assets dir",
+			"type": "shell",
+			"command": "rm -rf assets",
+			"group": "build"
+		}
+	]
+}
