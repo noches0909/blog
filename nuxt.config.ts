@@ -30,4 +30,10 @@ export default defineNuxtConfig({
     "@": resolve("./"),
     "~": resolve("./app"),
   },
+  app: {
+    head: {
+      title: "Noland Cheng",
+      // titleTemplate: "%s · Noland Cheng",
+    },
+  },
 })
