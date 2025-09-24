@@ -1,0 +1,41 @@
+<!doctype html>
+<!-- 
+  自定义HTML模板文件
+  这个文件会替换Nuxt的默认HTML模板
+  {{ HTML_ATTRS }} 会被Nuxt自动替换为HTML属性（如lang等）
+-->
+<html {{ HTML_ATTRS }}>
+  <head {{ HEAD_ATTRS }}>
+    <!-- 
+      内联脚本：防止FOUC（无样式内容闪烁）
+      这个脚本会在页面加载的最早期执行，比Vue和CSS更早
+      目的是立即设置正确的颜色模式，避免主题切换时的闪烁
+    -->
+    <script>
+      ;(function () {
+        // 颜色模式在localStorage中的存储键名（与nuxt.config.ts中一致）
+        const storageKey = "nuxt-color-mode"
+
+        // 检测用户的系统主题偏好（暗黑模式/明亮模式）
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
+
+        // 优先使用用户手动设置的主题，否则跟随系统设置
+        const stored = localStorage.getItem(storageKey)
+        const colorMode = stored || (prefersDark ? "dark" : "light")
+
+        // 立即为HTML根元素添加主题类名，这样CSS规则能立即生效
+        document.documentElement.classList.add(colorMode)
+
+        // 设置color-scheme属性，影响浏览器默认样式（如滚动条等）
+        document.documentElement.style.colorScheme = colorMode
+      })()
+    </script>
+
+    <!-- {{ HEAD }} 会被Nuxt替换为所有的head标签内容（meta、link、title等） -->
+    {{ HEAD }}
+  </head>
+  <body {{ BODY_ATTRS }}>
+    <!-- {{ BODY }} 会被Nuxt替换为整个应用的内容 -->
+    {{ BODY }}
+  </body>
+</html>

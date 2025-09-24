@@ -1,17 +1,33 @@
+/* 
+  Tailwind CSS 主样式文件
+  这是整个项目的CSS入口文件
+*/
+
+/* 导入Tailwind CSS v4 核心样式 */
 @import "tailwindcss";
+
+/* 导入动画库，提供CSS动画效果 */
 @import "tw-animate-css";
 
-/* Tell Tailwind v4 where to scan for class names */
-/* File is at app/assets/css/tailwind.css */
-@source "../../../app/**/*.{vue,js,ts}";
-@source "../../../components/**/*.{vue,js,ts}";
-@source "../../../layouts/**/*.vue";
-@source "../../../pages/**/*.vue";
-@source "../../../content/**/*.{md,vue}";
-@source "../../../app/plugins/**/*.{js,ts}";
+/* 
+  告诉Tailwind v4 在哪些文件中扫描CSS类名
+  Tailwind会根据这些路径扫描文件，只生成实际使用的CSS
+*/
+@source "../../../app/**/*.{vue,js,ts}"; /* app目录下的所有Vue/JS/TS文件 */
+@source "../../../components/**/*.{vue,js,ts}"; /* components目录下的组件 */
+@source "../../../layouts/**/*.vue"; /* 布局文件 */
+@source "../../../pages/**/*.vue"; /* 页面文件 */
+@source "../../../content/**/*.{md,vue}"; /* 内容文件（Markdown等） */
+@source "../../../app/plugins/**/*.{js,ts}"; /* 插件文件 */
 
+/* 自定义变体：定义暗黑模式的CSS选择器规则 */
 @custom-variant dark (&:is(.dark *));
 
+/* 
+  Tailwind主题配置
+  定义设计系统的颜色变量和其他设计令牌
+  这些变量可以在整个项目中使用，支持暗黑/明亮模式切换
+*/
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -49,6 +65,7 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  /* Aurora背景动画关键帧定义 */
   --animate-aurora: aurora 60s linear infinite;
   @keyframes aurora {
     from {
@@ -64,6 +81,10 @@
   }
 }
 
+/* 
+  明亮模式的颜色定义
+  使用CSS自定义属性（变量），这些颜色会被Tailwind的主题变量引用
+*/
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -100,6 +121,10 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
+/* 
+  暗黑模式的颜色定义
+  当HTML元素有.dark类时，这些颜色变量会覆盖明亮模式的颜色
+*/
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
@@ -135,21 +160,48 @@
   --sidebar-ring: oklch(0.439 0 0);
 }
 
+/* 
+  基础样式层
+  @layer base 确保这些样式在Tailwind的基础层中，优先级正确
+*/
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
   body {
     @apply bg-background text-foreground;
+    /* 防止FOUC的样式 - 添加平滑的颜色过渡动画 */
+    transition:
+      background-color 0.15s ease-in-out,
+      color 0.15s ease-in-out;
+  }
+
+  /* 
+    确保页面在CSS完全加载前就有基本的背景色和文字色
+    这可以防止白屏闪烁，提供更好的用户体验
+  */
+  html {
+    background-color: white; /* 明亮模式默认背景 */
+    color: black; /* 明亮模式默认文字色 */
+  }
+
+  html.dark {
+    background-color: #0f172a; /* 暗黑模式背景（slate-900） */
+    color: white; /* 暗黑模式文字色 */
   }
 }
 
+/* 
+  全局颜色方案设置
+  color-scheme属性告诉浏览器当前页面支持的颜色模式
+  这会影响浏览器的默认UI元素（如滚动条、表单控件等）的外观
+*/
 html {
-  color-scheme: light dark;
+  color-scheme: light dark; /* 支持明亮和暗黑两种模式 */
 }
 html.dark {
-  color-scheme: dark;
+  color-scheme: dark; /* 强制暗黑模式 */
 }
 html.light {
-  color-scheme: light;
+  color-scheme: light; /* 强制明亮模式 */
 }
