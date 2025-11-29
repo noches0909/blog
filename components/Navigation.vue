@@ -2,6 +2,7 @@
 const navigation = [
   { name: "博客", path: "/blog", icon: "📝" },
   { name: "项目", path: "/project", icon: "💻" },
+  { name: "demo", path: "/demo", icon: "🧪" },
   { name: "关于", path: "/about", icon: "👨‍💻" },
 ]
 </script>
