@@ -12,7 +12,6 @@ export default defineNuxtConfig({
   modules: [
     "@nuxt/content", // 内容管理系统，支持Markdown等
     "@nuxt/icon", // 图标库，提供大量图标
-    "shadcn-nuxt", // Shadcn UI组件库
     "@nuxtjs/color-mode", // 暗黑/明亮模式切换功能
   ],
 
@@ -43,12 +42,6 @@ export default defineNuxtConfig({
     plugins: {
       "@tailwindcss/postcss": {}, // Tailwind CSS处理器
     },
-  },
-
-  // Shadcn UI组件库配置
-  shadcn: {
-    prefix: "", // 组件名前缀（空表示无前缀）
-    componentDir: "@@/components/ui", // UI组件存放目录（根目录下）
   },
 
   // 颜色模式配置（暗黑/明亮主题）

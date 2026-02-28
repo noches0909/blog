@@ -170,6 +170,10 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
     /* 防止FOUC的样式 - 添加平滑的颜色过渡动画 */
     transition:
       background-color 0.15s ease-in-out,
