@@ -36,8 +36,19 @@ function formatDate(value?: string) {
       }"
       class="relative flex w-full max-w-4xl flex-col items-center justify-center gap-4 px-4 py-6 sm:py-0"
     >
-      <Avatar class="h-24 w-24 border-2 border-white/70 shadow-lg sm:h-28 sm:w-28 dark:border-slate-700">
-        <AvatarImage :src="avatarUrl" alt="Noland Cheng" />
+      <Avatar
+        class="h-24 w-24 border-2 border-white/70 shadow-lg sm:h-28 sm:w-28 dark:border-slate-700"
+        style="width: clamp(6rem, 22vw, 7rem); height: clamp(6rem, 22vw, 7rem);"
+      >
+        <AvatarImage
+          :src="avatarUrl"
+          alt="Noland Cheng"
+          class="object-cover object-top"
+          width="112"
+          height="112"
+          loading="eager"
+          decoding="async"
+        />
         <AvatarFallback>NC</AvatarFallback>
       </Avatar>
 

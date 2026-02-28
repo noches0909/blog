@@ -9,8 +9,11 @@ import avatarUrl from "~/assets/image/avatar.png"
     <div class="container mx-auto px-4 py-10 sm:py-16">
       <div class="max-w-4xl mx-auto">
         <div class="text-center mb-8 sm:mb-12">
-          <Avatar class="w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-5 sm:mb-6">
-            <AvatarImage :src="avatarUrl" alt="Noland Cheng" />
+          <Avatar
+            class="w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-5 sm:mb-6"
+            style="width: clamp(5rem, 18vw, 6rem); height: clamp(5rem, 18vw, 6rem);"
+          >
+            <AvatarImage :src="avatarUrl" alt="Noland Cheng" class="object-cover object-top" width="96" height="96" />
             <AvatarFallback>NC</AvatarFallback>
           </Avatar>
           <h1 class="text-3xl sm:text-4xl font-bold mb-3 sm:mb-4 text-slate-900 dark:text-white">关于我</h1>
