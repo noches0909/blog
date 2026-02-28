@@ -1,6 +1,9 @@
 // Nuxt 配置文档: https://nuxt.com/docs/api/configuration/nuxt-config
 import { resolve } from "pathe"
 
+const isGitHubActions = process.env.GITHUB_ACTIONS === "true"
+const repositoryName = process.env.GITHUB_REPOSITORY?.split("/")[1] || "blog"
+
 export default defineNuxtConfig({
   // 兼容性日期 - 告诉Nuxt你希望使用的功能版本
   compatibilityDate: "2025-07-15",
@@ -26,6 +29,11 @@ export default defineNuxtConfig({
   // Nuxt功能特性配置
   features: {
     inlineStyles: false, // 不内联CSS样式，避免FOUC闪烁
+  },
+
+  // 对 GitHub Pages 静态部署更稳，避免 payload 抓取路径冲突
+  experimental: {
+    payloadExtraction: false,
   },
 
   // 组件自动导入配置
@@ -66,6 +74,9 @@ export default defineNuxtConfig({
 
   // 应用配置
   app: {
+    // GitHub Pages 项目站点需要带仓库名前缀，例如 /blog/
+    baseURL: isGitHubActions ? `/${repositoryName}/` : "/",
+
     head: {
       title: "Noland Cheng", // 网站标题
       // titleTemplate: "%s · Noland Cheng", // 页面标题模板（被注释掉）
