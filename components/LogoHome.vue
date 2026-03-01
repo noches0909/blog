@@ -7,6 +7,10 @@
     <img
       src="/favicon.ico"
       alt="Home"
+      width="32"
+      height="32"
+      loading="eager"
+      decoding="async"
       class="h-8 w-8 rounded transition-transform duration-200 group-hover:scale-110 shadow-sm"
     />
   </NuxtLink>

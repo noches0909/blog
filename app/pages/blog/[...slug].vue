@@ -10,11 +10,11 @@ const slug = computed(() => {
   return param || ""
 })
 
-const currentPath = computed(() => `/blog/${slug.value}`)
+const currentStem = computed(() => `blog/${slug.value}`)
 
 const { data: article } = await useAsyncData(
-  () => `blog-article:${currentPath.value}`,
-  () => queryCollection("blog").path(currentPath.value).first(),
+  () => `blog-article:${currentStem.value}`,
+  () => queryCollection("blog").where("stem", "=", currentStem.value).first(),
 )
 
 if (!article.value) {
@@ -25,6 +25,7 @@ if (!article.value) {
 }
 
 const articleData = computed(() => article.value!)
+const currentPath = computed(() => articleData.value.path || `/blog/${slug.value}`)
 
 const { data: surroundings } = await useAsyncData(
   () => `blog-surroundings:${currentPath.value}`,
@@ -152,11 +153,31 @@ useSeoMeta({
   margin-top: 1rem;
   overflow-x: auto;
   border-radius: 0.75rem;
-  background: rgb(15 23 42);
+  border: 1px solid rgb(226 232 240);
+  background: rgb(248 250 252);
   padding: 1rem;
+}
+
+.dark .article-body :deep(pre) {
+  border-color: rgb(51 65 85);
+  background: rgb(15 23 42);
 }
 
 .article-body :deep(code) {
   font-size: 0.88rem;
+}
+
+.article-body :deep(p code),
+.article-body :deep(li code) {
+  border-radius: 0.35rem;
+  background: rgb(241 245 249);
+  color: rgb(15 23 42);
+  padding: 0.08rem 0.35rem;
+}
+
+.dark .article-body :deep(p code),
+.dark .article-body :deep(li code) {
+  background: rgb(51 65 85);
+  color: rgb(226 232 240);
 }
 </style>

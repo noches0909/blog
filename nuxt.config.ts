@@ -4,6 +4,16 @@ import { resolve } from "pathe"
 const isGitHubActions = process.env.GITHUB_ACTIONS === "true"
 const repositoryName = process.env.GITHUB_REPOSITORY?.split("/")[1] || "blog"
 
+function normalizeBaseURL(value: string) {
+  const withLeadingSlash = value.startsWith("/") ? value : `/${value}`
+  return withLeadingSlash.endsWith("/") ? withLeadingSlash : `${withLeadingSlash}/`
+}
+
+// 优先使用显式环境变量，兼容自定义域名或根路径部署
+const envBaseURL = process.env.NUXT_APP_BASE_URL?.trim()
+const inferredBaseURL = isGitHubActions ? `/${repositoryName}/` : "/"
+const baseURL = normalizeBaseURL(envBaseURL || inferredBaseURL)
+
 export default defineNuxtConfig({
   // 兼容性日期 - 告诉Nuxt你希望使用的功能版本
   compatibilityDate: "2025-07-15",
@@ -75,7 +85,11 @@ export default defineNuxtConfig({
   // 应用配置
   app: {
     // GitHub Pages 项目站点需要带仓库名前缀，例如 /blog/
-    baseURL: isGitHubActions ? `/${repositoryName}/` : "/",
+    baseURL,
+    pageTransition: {
+      name: "page-fade",
+      mode: "out-in",
+    },
 
     head: {
       title: "Noland Cheng", // 网站标题
@@ -95,7 +109,7 @@ export default defineNuxtConfig({
 
       // HTML头部link标签
       link: [
-        { rel: "icon", type: "image/x-icon", href: "/favicon.ico" }, // 网站图标
+        { rel: "icon", type: "image/x-icon", href: `${baseURL}favicon.ico` }, // 网站图标
       ],
     },
   },

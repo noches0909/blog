@@ -6,9 +6,21 @@
     <div class="fixed left-3 top-3 z-50 sm:left-4 sm:top-4">
       <LogoHome />
     </div>
-    <!-- Theme Toggle 固定在右上角 -->
+    <!-- 右上角：GitHub + Theme Toggle -->
     <div class="fixed right-3 top-3 z-50 sm:right-4 sm:top-4">
-      <ThemeToggle />
+      <div class="flex items-center gap-2">
+        <Button as-child variant="outline" size="icon" class="active:scale-95">
+          <a
+            href="https://github.com/noches0909"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="访问我的 GitHub"
+          >
+            <Icon name="lucide:github" class="h-4 w-4" />
+          </a>
+        </Button>
+        <ThemeToggle />
+      </div>
     </div>
 
     <!-- 页面内容 -->

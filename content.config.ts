@@ -12,8 +12,14 @@ const blog = defineCollection({
   }),
 })
 
+const project = defineCollection({
+  type: "page",
+  source: "project/**/*.md",
+})
+
 export default defineContentConfig({
   collections: {
     blog,
+    project,
   },
 })

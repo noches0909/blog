@@ -30,8 +30,8 @@ function isActive(path: string) {
           :class="[
             'inline-flex min-w-0 items-center justify-center gap-1 rounded-xl px-2 py-2 text-sm transition-all duration-300 sm:rounded-full sm:px-3',
             isActive(item.path)
-              ? 'scale-[1.01] bg-slate-900 text-white shadow-sm dark:bg-white dark:text-slate-900'
-              : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-700 dark:hover:text-white',
+              ? 'scale-[1.01] bg-primary text-primary-foreground shadow-sm ring-1 ring-primary/30'
+              : 'text-slate-600 hover:bg-primary/10 hover:text-primary dark:text-slate-400 dark:hover:bg-primary/20 dark:hover:text-primary',
           ]"
         >
           <Icon :name="item.icon" class="h-4 w-4 shrink-0" />

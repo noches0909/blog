@@ -209,3 +209,91 @@ html.dark {
 html.light {
   color-scheme: light; /* 强制明亮模式 */
 }
+
+/* 全局页面切换动画（底部菜单与列表/详情进出） */
+.page-fade-enter-active,
+.page-fade-leave-active,
+.page-tab-forward-enter-active,
+.page-tab-forward-leave-active,
+.page-tab-back-enter-active,
+.page-tab-back-leave-active,
+.page-stack-forward-enter-active,
+.page-stack-forward-leave-active,
+.page-stack-back-enter-active,
+.page-stack-back-leave-active {
+  will-change: opacity, transform;
+  transition:
+    opacity 0.24s ease,
+    transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.page-fade-enter-from,
+.page-fade-leave-to {
+  opacity: 0;
+}
+
+.page-tab-forward-enter-from {
+  opacity: 0;
+  transform: translateX(24px) scale(0.985);
+}
+
+.page-tab-forward-leave-to {
+  opacity: 0;
+  transform: translateX(-18px) scale(0.99);
+}
+
+.page-tab-back-enter-from {
+  opacity: 0;
+  transform: translateX(-24px) scale(0.985);
+}
+
+.page-tab-back-leave-to {
+  opacity: 0;
+  transform: translateX(18px) scale(0.99);
+}
+
+.page-stack-forward-enter-from {
+  opacity: 0;
+  transform: translateY(20px) scale(0.985);
+}
+
+.page-stack-forward-leave-to {
+  opacity: 0;
+  transform: translateY(-14px) scale(0.99);
+}
+
+.page-stack-back-enter-from {
+  opacity: 0;
+  transform: translateY(-16px) scale(0.985);
+}
+
+.page-stack-back-leave-to {
+  opacity: 0;
+  transform: translateY(16px) scale(0.99);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-fade-enter-active,
+  .page-fade-leave-active,
+  .page-tab-forward-enter-active,
+  .page-tab-forward-leave-active,
+  .page-tab-back-enter-active,
+  .page-tab-back-leave-active,
+  .page-stack-forward-enter-active,
+  .page-stack-forward-leave-active,
+  .page-stack-back-enter-active,
+  .page-stack-back-leave-active {
+    transition: opacity 0.01s linear;
+  }
+
+  .page-tab-forward-enter-from,
+  .page-tab-forward-leave-to,
+  .page-tab-back-enter-from,
+  .page-tab-back-leave-to,
+  .page-stack-forward-enter-from,
+  .page-stack-forward-leave-to,
+  .page-stack-back-enter-from,
+  .page-stack-back-leave-to {
+    transform: none;
+  }
+}

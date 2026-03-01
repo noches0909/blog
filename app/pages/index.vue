@@ -17,6 +17,14 @@ function formatDate(value?: string) {
 
   return dateFormatter.format(new Date(value))
 }
+
+function resolvePostTo(post: { stem?: string; path?: string }) {
+  if (post.stem?.startsWith("blog/")) {
+    return `/blog/${post.stem.slice("blog/".length)}`
+  }
+
+  return post.path || "/blog"
+}
 </script>
 
 <template>
@@ -89,8 +97,8 @@ function formatDate(value?: string) {
         <div v-if="latestPosts?.length" class="space-y-2">
           <NuxtLink
             v-for="post in latestPosts"
-            :key="post.path"
-            :to="post.path"
+            :key="post.stem || post.path"
+            :to="resolvePostTo(post)"
             class="block rounded-xl border border-slate-200 bg-white px-3 py-2.5 transition hover:border-slate-300 hover:shadow-sm sm:px-4 sm:py-3 dark:border-slate-700 dark:bg-slate-900/80 dark:hover:border-slate-500"
           >
             <div class="text-sm text-slate-500 dark:text-slate-400">{{ formatDate(post.date) }}</div>

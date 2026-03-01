@@ -46,6 +46,14 @@ const filteredPosts = computed(() => {
   return posts.value.filter((post) => (post.tags || []).includes(activeTag.value))
 })
 
+function resolvePostTo(post: { stem?: string; path?: string }) {
+  if (post.stem?.startsWith("blog/")) {
+    return `/blog/${post.stem.slice("blog/".length)}`
+  }
+
+  return post.path || "/blog"
+}
+
 function formatDate(value?: string) {
   if (!value) {
     return "-"
@@ -161,8 +169,8 @@ onBeforeUnmount(() => {
       >
         <NuxtLink
           v-for="post in filteredPosts"
-          :key="post.path"
-          :to="post.path"
+          :key="post.stem || post.path"
+          :to="resolvePostTo(post)"
           class="post-list-item block rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md sm:p-5 dark:border-slate-800 dark:bg-slate-900/70 dark:hover:border-slate-600"
         >
           <div class="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
