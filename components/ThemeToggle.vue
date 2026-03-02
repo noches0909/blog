@@ -19,7 +19,9 @@ function toggle() {
     :variant="isDark ? 'ghost' : 'outline'"
     size="icon"
     :class="
-      isDark ? ' bg-white/5 hover:bg-white/10 text-foreground active:scale-95' : 'active:scale-95'
+      isDark
+        ? 'bg-primary/18 text-primary ring-1 ring-primary/25 hover:bg-primary/24 active:scale-95'
+        : 'hover:border-primary/35 hover:bg-primary/10 hover:text-primary active:scale-95'
     "
     @click="toggle"
   >
