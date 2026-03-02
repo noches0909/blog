@@ -1,4 +1,9 @@
 <script setup lang="ts">
+definePageMeta({
+  // 兼容 GitHub Pages 的 /blog/<slug> 直达刷新
+  alias: ["/:slug(.*)*"],
+})
+
 const route = useRoute()
 
 const slug = computed(() => {
@@ -50,6 +55,19 @@ function formatDate(value?: string) {
   return dateFormatter.format(new Date(value))
 }
 
+function resolveArticleTo(path?: string) {
+  if (!path) {
+    return "/blog"
+  }
+
+  // 内容路径是 /blog/<slug>，站点 baseURL 也是 /blog/，这里去掉一层避免变成 /blog/blog/<slug>
+  if (path.startsWith("/blog/")) {
+    return `/${path.slice("/blog/".length)}`
+  }
+
+  return path
+}
+
 useSeoMeta({
   title: () => articleData.value.title || "文章详情",
   description: () => articleData.value.description || "博客文章详情页",
@@ -98,7 +116,7 @@ useSeoMeta({
       </article>
 
       <footer class="glass-nav-grid mt-6 md:grid-cols-2">
-        <NuxtLink v-if="previousArticle" :to="previousArticle.path" class="glass-nav-link">
+        <NuxtLink v-if="previousArticle" :to="resolveArticleTo(previousArticle.path)" class="glass-nav-link">
           <div class="text-sm text-slate-500 dark:text-slate-400">上一篇</div>
           <div class="mt-1 font-medium text-slate-900 dark:text-white">
             {{ previousArticle.title }}
@@ -106,7 +124,7 @@ useSeoMeta({
         </NuxtLink>
         <div v-else class="hidden md:block" />
 
-        <NuxtLink v-if="nextArticle" :to="nextArticle.path" class="glass-nav-link">
+        <NuxtLink v-if="nextArticle" :to="resolveArticleTo(nextArticle.path)" class="glass-nav-link">
           <div class="text-sm text-slate-500 dark:text-slate-400">下一篇</div>
           <div class="mt-1 font-medium text-slate-900 dark:text-white">{{ nextArticle.title }}</div>
         </NuxtLink>
