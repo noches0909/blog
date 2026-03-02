@@ -19,8 +19,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      # 默认按根路径部署；如需仓库子路径部署，在仓库 Variables 中设置 NUXT_APP_BASE_URL（例如 /blog/）
-      NUXT_APP_BASE_URL: ${{ vars.NUXT_APP_BASE_URL || '/' }}
+      # 可在仓库 Variables 中显式设置；未设置时由 nuxt.config.ts 自动推断 Pages 路径
+      NUXT_APP_BASE_URL: ${{ vars.NUXT_APP_BASE_URL }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4

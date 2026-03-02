@@ -3,6 +3,7 @@ import { resolve } from "pathe"
 
 const isGitHubActions = process.env.GITHUB_ACTIONS === "true"
 const repositoryName = process.env.GITHUB_REPOSITORY?.split("/")[1] || "blog"
+const isUserSiteRepository = repositoryName.endsWith(".github.io")
 
 function normalizeBaseURL(value: string) {
   const withLeadingSlash = value.startsWith("/") ? value : `/${value}`
@@ -11,7 +12,11 @@ function normalizeBaseURL(value: string) {
 
 // 优先使用显式环境变量，兼容自定义域名或根路径部署
 const envBaseURL = process.env.NUXT_APP_BASE_URL?.trim()
-const inferredBaseURL = isGitHubActions ? `/${repositoryName}/` : "/"
+const inferredBaseURL = isGitHubActions
+  ? isUserSiteRepository
+    ? "/"
+    : `/${repositoryName}/`
+  : "/"
 const baseURL = normalizeBaseURL(envBaseURL || inferredBaseURL)
 
 export default defineNuxtConfig({
