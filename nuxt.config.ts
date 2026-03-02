@@ -39,6 +39,10 @@ export default defineNuxtConfig({
   // Nitro服务器引擎配置
   nitro: {
     compressPublicAssets: true, // 压缩静态资源，提高加载速度
+    prerender: {
+      // GitHub Pages 构建环境偶发单路由预渲染失败时，不中断整体发布流程
+      failOnError: false,
+    },
   },
 
   // Nuxt功能特性配置
