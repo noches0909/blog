@@ -5,7 +5,8 @@
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
-    "generate": "nuxt generate",
+    "generate": "nuxt generate && node scripts/fix-pages-output.mjs",
+    "fix:pages-output": "node scripts/fix-pages-output.mjs",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },

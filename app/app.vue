@@ -2,23 +2,25 @@
 const pageReady = ref(!import.meta.dev)
 
 if (import.meta.dev && import.meta.client) {
-  let checks = 0
-  const maxChecks = 120
+  const revealWhenLoaded = () => {
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        pageReady.value = true
+      })
+    })
+  }
 
-  const waitForStyles = () => {
-    const hasStyles =
-      document.querySelector('style[data-vite-dev-id], style[data-vite-ref], link[rel="stylesheet"]') !== null
-
-    if (hasStyles || checks >= maxChecks) {
-      pageReady.value = true
+  onMounted(() => {
+    if (document.readyState === "complete") {
+      revealWhenLoaded()
       return
     }
 
-    checks += 1
-    requestAnimationFrame(waitForStyles)
-  }
-
-  onMounted(waitForStyles)
+    window.addEventListener("load", revealWhenLoaded, { once: true })
+    setTimeout(() => {
+      pageReady.value = true
+    }, 2500)
+  })
 }
 </script>
 
