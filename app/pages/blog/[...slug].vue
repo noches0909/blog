@@ -8,11 +8,16 @@ const route = useRoute()
 
 const slug = computed(() => {
   const param = route.params.slug
-  if (Array.isArray(param)) {
-    return param.join("/")
+  const raw = Array.isArray(param) ? param.join("/") : (param || "")
+
+  // Hydration 时可能命中 alias，把 slug 解析成 "blog/<actual-slug>"。
+  // 这里统一去掉前导 "blog/"，保证内容查询始终命中 "blog/<slug>"。
+  let normalized = raw.replace(/^\/+|\/+$/g, "")
+  if (normalized.startsWith("blog/")) {
+    normalized = normalized.slice("blog/".length)
   }
 
-  return param || ""
+  return normalized
 })
 
 const currentStem = computed(() => `blog/${slug.value}`)
