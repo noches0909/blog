@@ -7,7 +7,7 @@ useSeoMeta({
 const projects = [
   {
     name: "nuxt-blog",
-    description: "当前博客主项目，项目详情页内容直接读取仓库 README.md。",
+    description: "当前博客主项目，项目详情页内容来自 content/project/nuxt-blog.md。",
     status: "维护中",
     stack: ["Nuxt4", "@nuxt/content", "Tailwind CSS"],
     to: "/project/nuxt-blog",
@@ -29,7 +29,7 @@ const projects = [
         <p class="text-base uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Projects</p>
         <h1 class="mt-2 text-2xl font-semibold text-slate-900 sm:text-3xl dark:text-white">项目列表</h1>
         <p class="mt-2 text-base leading-relaxed text-slate-600 dark:text-slate-300">
-          只保留 nuxt-blog 项目，详情页内容由项目 README 驱动。
+          只保留 nuxt-blog 项目，详情页内容由项目文档驱动。
         </p>
       </header>
 
