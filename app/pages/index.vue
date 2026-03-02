@@ -20,7 +20,11 @@ function formatDate(value?: string) {
 
 function resolvePostTo(post: { stem?: string; path?: string }) {
   if (post.stem?.startsWith("blog/")) {
-    return `/blog/${post.stem.slice("blog/".length)}`
+    return `/${post.stem.slice("blog/".length)}`
+  }
+
+  if (post.path?.startsWith("/blog/")) {
+    return `/${post.path.slice("/blog/".length)}`
   }
 
   return post.path || "/blog"

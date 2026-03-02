@@ -43,7 +43,8 @@ export default defineNuxtConfig({
 
   // Nuxt功能特性配置
   features: {
-    inlineStyles: false, // 不内联CSS样式，避免FOUC闪烁
+    // 内联关键样式，降低刷新时“先裸 HTML 后加载 CSS”的闪烁
+    inlineStyles: true,
   },
 
   // 对 GitHub Pages 静态部署更稳，避免 payload 抓取路径冲突
