@@ -60,11 +60,6 @@ function resolveArticleTo(path?: string) {
     return "/blog"
   }
 
-  // 内容路径是 /blog/<slug>，站点 baseURL 也是 /blog/，这里去掉一层避免变成 /blog/blog/<slug>
-  if (path.startsWith("/blog/")) {
-    return `/${path.slice("/blog/".length)}`
-  }
-
   return path
 }
 
