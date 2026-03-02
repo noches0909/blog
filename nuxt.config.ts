@@ -1,4 +1,5 @@
 // Nuxt 配置文档: https://nuxt.com/docs/api/configuration/nuxt-config
+import { existsSync, readdirSync, statSync } from "node:fs"
 import { resolve } from "pathe"
 
 const isGitHubActions = process.env.GITHUB_ACTIONS === "true"
@@ -18,6 +19,38 @@ const inferredBaseURL = isGitHubActions
     : `/${repositoryName}/`
   : "/"
 const baseURL = normalizeBaseURL(envBaseURL || inferredBaseURL)
+
+function collectMarkdownStems(dir: string, prefix = ""): string[] {
+  if (!existsSync(dir)) {
+    return []
+  }
+
+  const entries = readdirSync(dir)
+  const stems: string[] = []
+
+  for (const entry of entries) {
+    const fullPath = resolve(dir, entry)
+    const stats = statSync(fullPath)
+
+    if (stats.isDirectory()) {
+      stems.push(...collectMarkdownStems(fullPath, `${prefix}${entry}/`))
+      continue
+    }
+
+    if (!entry.endsWith(".md")) {
+      continue
+    }
+
+    stems.push(`${prefix}${entry.replace(/\.md$/, "")}`)
+  }
+
+  return stems
+}
+
+const legacyBlogDetailRoutes = collectMarkdownStems(resolve("./content/blog")).flatMap((stem) => [
+  `/blog/${stem}`,
+  `/blog/blog/${stem}`,
+])
 
 export default defineNuxtConfig({
   // 兼容性日期 - 告诉Nuxt你希望使用的功能版本
@@ -42,6 +75,8 @@ export default defineNuxtConfig({
     prerender: {
       // GitHub Pages 构建环境偶发单路由预渲染失败时，不中断整体发布流程
       failOnError: false,
+      // 兼容旧版 /blog/blog/<slug> 链接（baseURL=/blog 时内部路由会映射为该外部路径）
+      routes: legacyBlogDetailRoutes,
     },
   },
 
