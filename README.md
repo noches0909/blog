@@ -6,7 +6,7 @@
 
 已完成的基础能力：
 
-- 首页展示 + 最新文章入口
+- 首页展示（头像、简介）
 - 博客列表页 `/blog`（来自 `@nuxt/content`）
 - 文章详情页 `/blog/[...slug]`（Markdown 渲染）
 - 上一篇 / 下一篇跳转
@@ -36,7 +36,8 @@
 │   ├── ui/                # shadcn 风格 UI 组件
 │   └── *.vue              # 业务组件
 ├── content/
-│   └── blog/*.md          # 博客文章源文件
+│   ├── blog/*.md          # 博客文章源文件
+│   └── project/nuxt-blog.md -> ../../README.md
 ├── content.config.ts      # Nuxt Content 集合配置
 └── nuxt.config.ts
 ```

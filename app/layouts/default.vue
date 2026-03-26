@@ -1,4 +1,14 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const route = useRoute()
+
+const mainClass = computed(() => {
+  if (route.path === "/") {
+    return ""
+  }
+
+  return "pb-24 pt-14 sm:pt-0"
+})
+</script>
 
 <template>
   <div class="min-h-screen">
@@ -24,7 +34,7 @@
     </div>
 
     <!-- 页面内容 -->
-    <main class="pb-24 pt-14 sm:pt-0">
+    <main :class="mainClass">
       <slot />
     </main>
 

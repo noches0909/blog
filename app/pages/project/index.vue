@@ -7,7 +7,7 @@ useSeoMeta({
 const projects = [
   {
     name: "nuxt-blog",
-    description: "当前博客主项目，项目详情页内容来自 content/project/nuxt-blog.md。",
+    description: "当前博客主项目，项目详情页内容与仓库 README.md 保持同步。",
     status: "维护中",
     stack: ["Nuxt4", "@nuxt/content", "Tailwind CSS"],
     to: "/project/nuxt-blog",
