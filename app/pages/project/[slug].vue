@@ -12,7 +12,7 @@ const projectMeta = computed(() => {
   if (slug.value === "nuxt-blog") {
     return {
       title: "nuxt-blog",
-      description: "项目详情页内容来自 content/project/nuxt-blog.md。",
+      description: "项目详情页内容来自仓库 README.md，并通过 content/project/nuxt-blog.md 软链接接入。",
     }
   }
 

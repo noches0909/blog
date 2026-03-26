@@ -4,7 +4,7 @@
       v-bind="props"
       :class="
         cn(
-          'transition-bg relative flex min-h-[100dvh] flex-col items-center justify-start bg-zinc-50 pt-6 text-slate-950 sm:justify-center sm:pt-0 dark:bg-zinc-900',
+          'transition-bg relative flex min-h-[100dvh] box-border flex-col items-center justify-start bg-zinc-50 pt-6 text-slate-950 sm:justify-center sm:pt-0 dark:bg-zinc-900',
           props.class
         )
       "

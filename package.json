@@ -3,12 +3,12 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate && node scripts/fix-pages-output.mjs",
+    "build": "node scripts/sync-project-doc-link.mjs && nuxt build",
+    "dev": "node scripts/sync-project-doc-link.mjs && nuxt dev",
+    "generate": "node scripts/sync-project-doc-link.mjs && nuxt generate && node scripts/fix-pages-output.mjs",
     "fix:pages-output": "node scripts/fix-pages-output.mjs",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "node scripts/sync-project-doc-link.mjs && nuxt prepare"
   },
   "dependencies": {
     "@iconify-json/lucide": "^1.2.95",
