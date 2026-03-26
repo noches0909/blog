@@ -3,7 +3,7 @@ import avatarUrl from "~/assets/image/avatar.png"
 </script>
 
 <template>
-  <div class="glass-page px-4 py-10 sm:py-14">
+  <div class="glass-page px-4 pt-10 pb-28 sm:py-14">
     <div class="glass-backdrop">
       <div class="glass-orb glass-orb-left" />
       <div class="glass-orb glass-orb-right" />

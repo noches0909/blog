@@ -1,17 +1,7 @@
-<script setup lang="ts">
-const route = useRoute()
-
-const mainClass = computed(() => {
-  if (route.path === "/") {
-    return ""
-  }
-
-  return "pb-24 pt-14 sm:pt-0"
-})
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <div class="min-h-screen">
+  <div class="min-h-[100dvh]">
     <!-- 左上角首页 Logo -->
     <div class="fixed left-3 top-3 z-50 sm:left-4 sm:top-4">
       <LogoHome />
@@ -34,7 +24,7 @@ const mainClass = computed(() => {
     </div>
 
     <!-- 页面内容 -->
-    <main :class="mainClass">
+    <main class="min-h-0">
       <slot />
     </main>
 

@@ -213,7 +213,8 @@ html.light {
 @layer components {
   .glass-page {
     position: relative;
-    min-height: 100vh;
+    box-sizing: border-box;
+    min-height: 100dvh;
     overflow: hidden;
     background:
       radial-gradient(120% 75% at 0% 0%, rgb(191 219 254 / 0.46), transparent 58%),
