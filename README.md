@@ -1,44 +1,40 @@
 # blog
 
-基于 Nuxt 4 的个人博客项目（MVP 阶段）。
+基于 Nuxt 4 的个人博客项目。
 
-## 当前状态
+## 当前能力
 
-已完成的基础能力：
-
-- 首页展示（头像、简介）
-- 博客列表页 `/blog`（来自 `@nuxt/content`）
-- 文章详情页 `/blog/[...slug]`（Markdown 渲染）
-- 上一篇 / 下一篇跳转
-- 项目页、关于页
-- 暗黑模式切换（`@nuxtjs/color-mode`）
+- 首页介绍页
+- 博客列表页 `/blog`
+- 文章详情页 `/blog/[...slug]`
+- 项目列表页与项目详情页
+- Markdown 内容渲染
+- 暗黑模式切换
 
 ## 技术栈
 
 - `nuxt@4`
 - `@nuxt/content`
-- `@vueuse/core@14`
-- `reka-ui`（配合本地 shadcn 风格组件）
-- `@nuxt/icon`
+- `@nuxtjs/color-mode`
 - `tailwindcss@4`
-- `motion-v`
 
 ## 目录说明
 
 ```txt
 .
 ├── app/
-│   ├── layouts/           # 全局布局
-│   ├── pages/             # 页面路由
-│   ├── plugins/           # 客户端/SSR 插件
-│   └── assets/            # 全局样式与静态资源
-├── components/
-│   ├── ui/                # shadcn 风格 UI 组件
-│   └── *.vue              # 业务组件
+│   ├── assets/css/              # 全局样式
+│   ├── layouts/                 # 默认布局
+│   ├── pages/                   # 页面路由
+│   └── app.vue                  # 应用入口
+├── components/                  # 业务组件与公用壳层
 ├── content/
-│   ├── blog/*.md          # 博客文章源文件
-│   └── project/nuxt-blog.md -> ../../README.md
-├── content.config.ts      # Nuxt Content 集合配置
+│   ├── blog/                    # 博客文章
+│   └── project/nuxt-blog.md     # README.md 的软链接
+├── scripts/
+│   ├── sync-project-doc-link.mjs
+│   └── fix-pages-output.mjs
+├── content.config.ts
 └── nuxt.config.ts
 ```
 
@@ -49,16 +45,12 @@ bun install
 bun run dev
 ```
 
-构建验证：
+## 检查与构建
 
 ```bash
-bun run nuxi typecheck
+bun run typecheck
 bun run build
+bun run generate
 ```
 
-## 后续待办（按优先级）
-
-1. 增加 RSS 与 sitemap
-2. 增加文章归档与分页
-3. 完善 SEO 字段（OG、canonical、结构化数据）
-4. 补充单元测试和 E2E 冒烟测试
+`generate` 会额外执行兼容脚本，补齐 GitHub Pages 静态部署下的旧链接输出。

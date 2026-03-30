@@ -2,11 +2,11 @@
 const route = useRoute()
 
 const navigation = [
-  { name: "首页", path: "/", icon: "lucide:house" },
-  { name: "博客", path: "/blog", icon: "lucide:notebook-tabs" },
-  { name: "项目", path: "/project", icon: "lucide:folder-git-2" },
-  { name: "关于", path: "/about", icon: "lucide:user-round" },
-]
+  { name: "首页", path: "/", icon: "house" },
+  { name: "博客", path: "/blog", icon: "notebook-tabs" },
+  { name: "项目", path: "/project", icon: "folder-git-2" },
+  { name: "关于", path: "/about", icon: "user-round" },
+] as const
 
 function isActive(path: string) {
   if (path === "/") {
@@ -34,7 +34,7 @@ function isActive(path: string) {
               : 'text-slate-600 hover:bg-primary/10 hover:text-primary dark:text-slate-400 dark:hover:bg-primary/20 dark:hover:text-primary',
           ]"
         >
-          <Icon :name="item.icon" class="h-4 w-4 shrink-0" />
+          <AppIcon :name="item.icon" class="h-4 w-4 shrink-0" />
           <span class="truncate text-sm">{{ item.name }}</span>
         </NuxtLink>
       </div>
