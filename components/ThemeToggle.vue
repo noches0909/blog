@@ -1,30 +1,22 @@
 <script setup lang="ts">
-import { computed } from "vue"
 const colorMode = useColorMode()
 
-const isDark = computed({
-  get: () => colorMode.value === "dark",
-  set: (val: boolean) => {
-    colorMode.preference = val ? "dark" : "light"
-  },
-})
+const isDark = computed(() => colorMode.value === "dark")
+const label = computed(() => (isDark.value ? "切换到浅色模式" : "切换到深色模式"))
 
-function toggle() {
-  colorMode.preference = colorMode.value === "dark" ? "light" : "dark"
+function toggleTheme() {
+  colorMode.preference = isDark.value ? "light" : "dark"
 }
 </script>
 
 <template>
-  <Button
-    :variant="isDark ? 'ghost' : 'outline'"
-    size="icon"
-    :class="
-      isDark
-        ? 'bg-primary/18 text-primary ring-1 ring-primary/25 hover:bg-primary/24 active:scale-95'
-        : 'hover:border-primary/35 hover:bg-primary/10 hover:text-primary active:scale-95'
-    "
-    @click="toggle"
+  <button
+    type="button"
+    class="icon-button"
+    :class="isDark && 'icon-button-active'"
+    :aria-label="label"
+    @click="toggleTheme"
   >
-    <Icon :name="isDark ? 'lucide:sun' : 'lucide:moon'" class="h-4 w-4" />
-  </Button>
+    <AppIcon :name="isDark ? 'sun' : 'moon'" class="h-4 w-4" />
+  </button>
 </template>

@@ -1,9 +1,8 @@
-// Nuxt 配置文档: https://nuxt.com/docs/api/configuration/nuxt-config
-import { existsSync, readdirSync, statSync } from "node:fs"
-import { resolve } from "pathe"
+import { existsSync, readdirSync } from "node:fs"
+import { resolve } from "node:path"
 
 const isGitHubActions = process.env.GITHUB_ACTIONS === "true"
-const repositoryName = process.env.GITHUB_REPOSITORY?.split("/")[1] || "blog"
+const repositoryName = process.env.GITHUB_REPOSITORY?.split("/")[1] ?? "blog"
 const isUserSiteRepository = repositoryName.endsWith(".github.io")
 
 function normalizeBaseURL(value: string) {
@@ -11,151 +10,87 @@ function normalizeBaseURL(value: string) {
   return withLeadingSlash.endsWith("/") ? withLeadingSlash : `${withLeadingSlash}/`
 }
 
-// 优先使用显式环境变量，兼容自定义域名或根路径部署
-const envBaseURL = process.env.NUXT_APP_BASE_URL?.trim()
-const inferredBaseURL = isGitHubActions
-  ? isUserSiteRepository
-    ? "/"
-    : `/${repositoryName}/`
-  : "/"
-const baseURL = normalizeBaseURL(envBaseURL || inferredBaseURL)
-
 function collectMarkdownStems(dir: string, prefix = ""): string[] {
   if (!existsSync(dir)) {
     return []
   }
 
-  const entries = readdirSync(dir)
-  const stems: string[] = []
-
-  for (const entry of entries) {
-    const fullPath = resolve(dir, entry)
-    const stats = statSync(fullPath)
-
-    if (stats.isDirectory()) {
-      stems.push(...collectMarkdownStems(fullPath, `${prefix}${entry}/`))
-      continue
+  return readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+    if (entry.isDirectory()) {
+      return collectMarkdownStems(resolve(dir, entry.name), `${prefix}${entry.name}/`)
     }
 
-    if (!entry.endsWith(".md")) {
-      continue
+    if (!entry.name.endsWith(".md")) {
+      return []
     }
 
-    stems.push(`${prefix}${entry.replace(/\.md$/, "")}`)
-  }
-
-  return stems
+    return `${prefix}${entry.name.replace(/\.md$/, "")}`
+  })
 }
 
-const legacyBlogDetailRoutes = collectMarkdownStems(resolve("./content/blog")).flatMap((stem) => [
+const envBaseURL = process.env.NUXT_APP_BASE_URL?.trim()
+const inferredBaseURL = isGitHubActions
+  ? (isUserSiteRepository ? "/" : `/${repositoryName}/`)
+  : "/"
+const baseURL = normalizeBaseURL(envBaseURL || inferredBaseURL)
+
+const legacyBlogRoutes = collectMarkdownStems(resolve("content/blog")).flatMap((stem) => [
   `/blog/${stem}`,
   `/blog/blog/${stem}`,
 ])
 
 export default defineNuxtConfig({
-  // 兼容性日期 - 告诉Nuxt你希望使用的功能版本
   compatibilityDate: "2025-07-15",
-
-  // 开发工具 - 在开发环境中启用Vue DevTools
   devtools: { enabled: true },
-
-  // Nuxt模块 - 扩展Nuxt功能的插件
-  modules: [
-    "@nuxt/content", // 内容管理系统，支持Markdown等
-    "@nuxt/icon", // 图标库，提供大量图标
-    "@nuxtjs/color-mode", // 暗黑/明亮模式切换功能
-  ],
-
-  // 全局CSS文件 - 会被注入到所有页面
+  modules: ["@nuxt/content", "@nuxtjs/color-mode"],
   css: ["~/assets/css/tailwind.css"],
-
-  // Nitro服务器引擎配置
-  nitro: {
-    compressPublicAssets: true, // 压缩静态资源，提高加载速度
-    prerender: {
-      // GitHub Pages 构建环境偶发单路由预渲染失败时，不中断整体发布流程
-      failOnError: false,
-      // 兼容旧版 /blog/blog/<slug> 链接（baseURL=/blog 时内部路由会映射为该外部路径）
-      routes: legacyBlogDetailRoutes,
+  components: [
+    {
+      path: resolve("components"),
+      pathPrefix: false,
+      extensions: ["vue"],
+    },
+  ],
+  postcss: {
+    plugins: {
+      "@tailwindcss/postcss": {},
     },
   },
-
-  // Nuxt功能特性配置
+  nitro: {
+    compressPublicAssets: true,
+    prerender: {
+      failOnError: false,
+      routes: legacyBlogRoutes,
+    },
+  },
   features: {
-    // 内联关键样式，降低刷新时“先裸 HTML 后加载 CSS”的闪烁
     inlineStyles: true,
   },
-
-  // 对 GitHub Pages 静态部署更稳，避免 payload 抓取路径冲突
   experimental: {
     payloadExtraction: false,
   },
-
-  // 组件自动导入配置
-  components: [
-    {
-      path: "@@/components", // 组件目录路径（根目录下的components）
-      pathPrefix: false, // 不使用路径作为组件名前缀
-      extensions: ["vue"], // 只导入.vue文件
-    },
-  ],
-
-  // PostCSS配置 - CSS预处理器
-  postcss: {
-    plugins: {
-      "@tailwindcss/postcss": {}, // Tailwind CSS处理器
-    },
-  },
-
-  // 颜色模式配置（暗黑/明亮主题）
   colorMode: {
-    classSuffix: "", // CSS类名后缀
-    preference: "system", // 默认跟随系统设置
-    fallback: "light", // 系统设置无法获取时的默认值
-    hid: "nuxt-color-mode-script", // 脚本标签ID
-    globalName: "__NUXT_COLOR_MODE__", // 全局变量名
-    componentName: "ColorScheme", // 组件名
-    classPrefix: "", // CSS类名前缀
-    storageKey: "nuxt-color-mode", // localStorage存储键名
+    preference: "system",
+    fallback: "light",
+    classSuffix: "",
   },
-
-  // 路径别名配置 - 简化import路径
-  alias: {
-    "@@": resolve("./"), // @@指向项目根目录（Nuxt规范）
-    "~~": resolve("./"), // ~~指向项目根目录（Nuxt规范，同@@）
-    "@": resolve("./app"), // @指向app目录（主要开发目录）
-    "~": resolve("./app"), // ~指向app目录（与@相同，提供选择）
-  },
-
-  // 应用配置
   app: {
-    // GitHub Pages 项目站点需要带仓库名前缀，例如 /blog/
     baseURL,
     pageTransition: {
       name: "page-fade",
       mode: "out-in",
     },
-
     head: {
-      title: "Noland Cheng", // 网站标题
-      // titleTemplate: "%s · Noland Cheng", // 页面标题模板（被注释掉）
-
-      // HTML根元素属性
+      title: "Noland Cheng",
       htmlAttrs: {
-        lang: "zh-cn", // 设置页面语言为中文
+        lang: "zh-CN",
       },
-
-      // HTML头部meta标签
       meta: [
-        { charset: "utf-8" }, // 字符编码
-        { name: "viewport", content: "width=device-width, initial-scale=1" }, // 响应式视口
-        { name: "color-scheme", content: "light dark" }, // 支持的颜色方案
+        { charset: "utf-8" },
+        { name: "viewport", content: "width=device-width, initial-scale=1" },
+        { name: "color-scheme", content: "light dark" },
       ],
-
-      // HTML头部link标签
-      link: [
-        { rel: "icon", type: "image/x-icon", href: `${baseURL}favicon.ico` }, // 网站图标
-      ],
+      link: [{ rel: "icon", type: "image/x-icon", href: `${baseURL}favicon.ico` }],
     },
   },
 })
