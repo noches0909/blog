@@ -2,6 +2,11 @@
 
 基于 Nuxt 4 的个人博客项目。
 
+## 在线地址
+
+- Vercel: [https://blog-hazel-seven-14.vercel.app/](https://blog-hazel-seven-14.vercel.app/)
+- GitHub Pages: [https://noches0909.github.io/blog/](https://noches0909.github.io/blog/)
+
 ## 当前能力
 
 - 首页介绍页
