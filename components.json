@@ -5,16 +5,13 @@
   "tailwind": {
     "config": "",
     "css": "app/assets/css/tailwind.css",
-    "baseColor": "neutral",
-    "cssVariables": true,
-    "prefix": ""
+    "baseColor": "slate",
+    "cssVariables": true
   },
   "aliases": {
     "components": "@@/components",
-    "composables": "@/composables",
-    "utils": "@@/lib/utils",
     "ui": "@@/components/ui",
-    "lib": "@@/lib"
-  },
-  "iconLibrary": "lucide"
+    "lib": "@@/lib",
+    "utils": "@@/lib/utils"
+  }
 }
