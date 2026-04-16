@@ -10,13 +10,13 @@ function toggleTheme() {
 </script>
 
 <template>
-  <button
-    type="button"
-    class="icon-button"
-    :class="isDark && 'icon-button-active'"
+  <Button
+    variant="outline"
+    size="icon"
+    class="rounded-xl bg-white/80 backdrop-blur-sm dark:bg-slate-900/70"
     :aria-label="label"
     @click="toggleTheme"
   >
     <AppIcon :name="isDark ? 'sun' : 'moon'" class="h-4 w-4" />
-  </button>
+  </Button>
 </template>

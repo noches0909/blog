@@ -10,16 +10,19 @@ useSeoMeta({
 <template>
   <PageShell width="md">
     <header class="text-center">
-      <img
-        :src="avatarUrl"
-        alt="Noland Cheng"
-        width="96"
-        height="96"
-        loading="eager"
-        decoding="async"
-        class="mx-auto mb-5 h-20 w-20 rounded-full object-cover object-top shadow-lg sm:h-24 sm:w-24"
+      <Avatar
+        class="mx-auto mb-5 h-20 w-20 shadow-lg sm:h-24 sm:w-24"
         style="width: clamp(5rem, 18vw, 6rem); height: clamp(5rem, 18vw, 6rem);"
-      />
+      >
+        <AvatarImage
+          :src="avatarUrl"
+          alt="Noland Cheng"
+          loading="eager"
+          decoding="async"
+          class="object-cover object-top"
+        />
+        <AvatarFallback>NC</AvatarFallback>
+      </Avatar>
       <h1 class="text-3xl font-bold text-slate-900 sm:text-4xl dark:text-white">关于我</h1>
       <p class="mt-2 text-base text-slate-600 dark:text-slate-400">页面内容保持精简，后续会逐步补充。</p>
     </header>

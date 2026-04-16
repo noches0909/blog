@@ -42,7 +42,7 @@ const legacyBlogRoutes = collectMarkdownStems(resolve("content/blog")).flatMap((
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
-  modules: ["@nuxt/content", "@nuxtjs/color-mode"],
+  modules: ["@nuxt/content", "@nuxtjs/color-mode", "shadcn-nuxt"],
   css: ["~/assets/css/tailwind.css"],
   components: [
     {
@@ -51,6 +51,10 @@ export default defineNuxtConfig({
       extensions: ["vue"],
     },
   ],
+  shadcn: {
+    prefix: "",
+    componentDir: "./components/ui",
+  },
   postcss: {
     plugins: {
       "@tailwindcss/postcss": {},

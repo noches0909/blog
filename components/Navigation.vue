@@ -23,20 +23,22 @@ function isActive(path: string) {
       class="rounded-2xl border border-slate-200 bg-white/88 px-1.5 py-1.5 shadow-lg backdrop-blur-md dark:border-slate-700 dark:bg-slate-800/88 sm:rounded-full sm:px-2 sm:py-2"
     >
       <div class="grid grid-cols-4 items-stretch gap-1 sm:flex sm:items-center">
-        <NuxtLink
+        <Button
           v-for="item in navigation"
           :key="item.path"
-          :to="item.path"
+          as-child
+          size="sm"
+          :variant="isActive(item.path) ? 'default' : 'ghost'"
           :class="[
-            'inline-flex min-w-0 items-center justify-center gap-1 rounded-xl px-2 py-2 text-sm transition-all duration-300 sm:rounded-full sm:px-3',
-            isActive(item.path)
-              ? 'scale-[1.01] bg-primary text-primary-foreground shadow-sm ring-1 ring-primary/30'
-              : 'text-slate-600 hover:bg-primary/10 hover:text-primary dark:text-slate-400 dark:hover:bg-primary/20 dark:hover:text-primary',
+            'h-auto min-w-0 rounded-xl px-2 py-2 sm:rounded-full sm:px-3',
+            !isActive(item.path) && 'text-slate-600 dark:text-slate-400',
           ]"
         >
-          <AppIcon :name="item.icon" class="h-4 w-4 shrink-0" />
-          <span class="truncate text-sm">{{ item.name }}</span>
-        </NuxtLink>
+          <NuxtLink :to="item.path">
+            <AppIcon :name="item.icon" class="h-4 w-4 shrink-0" />
+            <span class="truncate text-sm">{{ item.name }}</span>
+          </NuxtLink>
+        </Button>
       </div>
     </div>
   </nav>

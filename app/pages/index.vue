@@ -7,16 +7,19 @@ import avatarUrl from "~/assets/image/avatar.png"
     <section
       class="hero-card relative flex w-full max-w-4xl flex-col items-center justify-center gap-4 px-4 py-6 text-center sm:py-0"
     >
-      <img
-        :src="avatarUrl"
-        alt="Noland Cheng"
-        width="112"
-        height="112"
-        loading="eager"
-        decoding="async"
-        class="h-24 w-24 rounded-full border-2 border-white/70 object-cover object-top shadow-lg sm:h-28 sm:w-28 dark:border-slate-700"
+      <Avatar
+        class="h-24 w-24 border-2 border-white/70 shadow-lg sm:h-28 sm:w-28 dark:border-slate-700"
         style="width: clamp(6rem, 22vw, 7rem); height: clamp(6rem, 22vw, 7rem);"
-      />
+      >
+        <AvatarImage
+          :src="avatarUrl"
+          alt="Noland Cheng"
+          loading="eager"
+          decoding="async"
+          class="object-cover object-top"
+        />
+        <AvatarFallback>NC</AvatarFallback>
+      </Avatar>
 
       <h1 class="text-2xl font-bold sm:text-3xl md:text-6xl dark:text-white">Noland Cheng</h1>
 

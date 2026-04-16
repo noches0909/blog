@@ -35,6 +35,13 @@
   --foreground: oklch(0.145 0 0);
   --primary: #f03752;
   --primary-foreground: #fff;
+  --secondary: oklch(0.96 0.003 264.54);
+  --secondary-foreground: oklch(0.205 0 0);
+  --accent: oklch(0.97 0.002 247.84);
+  --accent-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0.002 247.84);
+  --muted-foreground: oklch(0.47 0.013 255.56);
+  --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);
   --input: rgb(255 255 255 / 0.86);
   --ring: #f03752;
@@ -43,6 +50,13 @@
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(0.269 0 0);
   --input: rgb(15 23 42 / 0.72);
   --ring: #f03752;
@@ -85,53 +99,6 @@
 @layer components {
   .hero-card {
     animation: hero-rise 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
-  }
-
-  .icon-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.25rem;
-    height: 2.25rem;
-    border-radius: 0.75rem;
-    border: 1px solid rgb(203 213 225 / 0.8);
-    background: var(--input);
-    color: rgb(51 65 85);
-    box-shadow: 0 8px 24px -18px rgb(15 23 42 / 0.46);
-    backdrop-filter: blur(14px);
-    transition:
-      border-color 0.2s ease,
-      background-color 0.2s ease,
-      color 0.2s ease,
-      transform 0.2s ease;
-  }
-
-  .icon-button:hover {
-    border-color: color-mix(in oklab, var(--primary) 35%, white 65%);
-    background: color-mix(in oklab, var(--primary) 10%, white 90%);
-    color: var(--primary);
-  }
-
-  .dark .icon-button {
-    border-color: rgb(71 85 105 / 0.72);
-    color: rgb(226 232 240);
-  }
-
-  .dark .icon-button:hover {
-    border-color: color-mix(in oklab, var(--primary) 40%, rgb(71 85 105));
-    background: color-mix(in oklab, var(--primary) 18%, rgb(15 23 42));
-    color: color-mix(in oklab, var(--primary) 78%, white 22%);
-  }
-
-  .icon-button-active {
-    border-color: color-mix(in oklab, var(--primary) 44%, transparent);
-    background: color-mix(in oklab, var(--primary) 18%, white 82%);
-    color: var(--primary);
-  }
-
-  .dark .icon-button-active {
-    border-color: color-mix(in oklab, var(--primary) 44%, rgb(71 85 105));
-    background: color-mix(in oklab, var(--primary) 22%, rgb(15 23 42));
   }
 
   .glass-page {
@@ -248,60 +215,6 @@
   .dark .glass-rail {
     border-color: rgb(71 85 105 / 0.62);
     background: rgb(15 23 42 / 0.42);
-  }
-
-  .glass-tab {
-    position: relative;
-    z-index: 1;
-    border-radius: 0.8rem;
-    padding: 0.48rem 0.82rem;
-    font-size: 0.95rem;
-    font-weight: 500;
-    transition:
-      color 0.24s ease,
-      background-color 0.24s ease;
-  }
-
-  .glass-tab-idle {
-    color: rgb(100 116 139);
-    opacity: 0.82;
-  }
-
-  .glass-tab-idle:hover {
-    color: color-mix(in oklab, var(--primary) 72%, black 28%);
-    opacity: 1;
-  }
-
-  .dark .glass-tab-idle {
-    color: rgb(148 163 184 / 0.88);
-  }
-
-  .dark .glass-tab-idle:hover {
-    color: color-mix(in oklab, var(--primary) 74%, white 26%);
-  }
-
-  .glass-tab-active {
-    border: 1px solid color-mix(in oklab, var(--primary) 42%, transparent);
-    background: linear-gradient(
-      145deg,
-      color-mix(in oklab, var(--primary) 16%, white 84%),
-      color-mix(in oklab, var(--primary) 24%, white 76%)
-    );
-    color: color-mix(in oklab, var(--primary) 82%, black 18%);
-    font-weight: 600;
-    opacity: 1;
-    text-shadow: 0 1px 0 rgb(255 255 255 / 0.65);
-  }
-
-  .dark .glass-tab-active {
-    border-color: color-mix(in oklab, var(--primary) 52%, rgb(148 163 184 / 28%));
-    background: linear-gradient(
-      145deg,
-      color-mix(in oklab, var(--primary) 36%, rgb(15 23 42)),
-      color-mix(in oklab, var(--primary) 26%, rgb(15 23 42))
-    );
-    color: color-mix(in oklab, var(--primary) 82%, white 18%);
-    text-shadow: 0 1px 0 rgb(2 6 23 / 0.32);
   }
 
   .glass-stack {

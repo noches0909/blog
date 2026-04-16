@@ -57,17 +57,17 @@ function formatDate(value?: string) {
       </p>
 
       <div class="glass-rail">
-        <button
+        <Button
           v-for="tag in allTags"
           :key="tag"
-          type="button"
-          class="glass-tab"
-          :class="activeTag === tag ? 'glass-tab-active' : 'glass-tab-idle'"
+          size="sm"
+          :variant="activeTag === tag ? 'default' : 'outline'"
+          class="rounded-full"
           :aria-pressed="activeTag === tag"
           @click="activeTag = tag"
         >
           {{ tag }}
-        </button>
+        </Button>
       </div>
     </header>
 
