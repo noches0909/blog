@@ -25,7 +25,7 @@
       </div>
     </div>
 
-    <main class="min-h-0">
+    <main class="relative min-h-0 overflow-x-hidden">
       <slot />
     </main>
 

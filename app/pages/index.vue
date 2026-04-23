@@ -9,7 +9,6 @@ import avatarUrl from "~/assets/image/avatar.png"
     >
       <Avatar
         class="h-24 w-24 border-2 border-white/70 shadow-lg sm:h-28 sm:w-28 dark:border-slate-700"
-        style="width: clamp(6rem, 22vw, 7rem); height: clamp(6rem, 22vw, 7rem);"
       >
         <AvatarImage
           :src="avatarUrl"

@@ -49,20 +49,25 @@ function formatDate(value?: string) {
 
 <template>
   <PageShell width="lg">
-    <header class="glass-shell mb-6 p-5 sm:mb-8 sm:p-6">
-      <p class="text-base uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Blog</p>
-      <h1 class="mt-2 text-2xl font-semibold text-slate-900 sm:text-3xl dark:text-white">文章列表</h1>
-      <p class="mt-2 text-base leading-relaxed text-slate-600 dark:text-slate-300">
-        当前提供最小可用的博客功能：文章列表、标签筛选和 Markdown 详情页渲染。
-      </p>
+    <header class="studio-header">
+      <p class="studio-kicker">Blog</p>
+      <div class="grid gap-5 md:grid-cols-[1fr_18rem] md:items-end">
+        <h1 class="studio-title">文章索引</h1>
+        <p class="studio-copy md:pb-2">
+          记录 Nuxt、前端工程和产品实现过程中的思考。保留简洁的入口，但让每篇文章像一条可以展开的线索。
+        </p>
+      </div>
 
-      <div class="glass-rail">
+      <div class="studio-rail pt-1">
         <Button
           v-for="tag in allTags"
           :key="tag"
           size="sm"
-          :variant="activeTag === tag ? 'default' : 'outline'"
-          class="rounded-full"
+          variant="ghost"
+          :class="[
+            'studio-filter h-9 px-4',
+            activeTag === tag && 'studio-filter-active hover:bg-primary hover:text-white',
+          ]"
           :aria-pressed="activeTag === tag"
           @click="activeTag = tag"
         >
@@ -71,43 +76,47 @@ function formatDate(value?: string) {
       </div>
     </header>
 
-    <section v-if="pending" class="glass-shell glass-stack">
-      <div v-for="idx in 3" :key="idx" class="space-y-3 px-4 py-5 sm:px-5">
-        <div class="h-6 w-2/5 animate-pulse rounded-full bg-white/75 dark:bg-slate-700/65" />
-        <div class="h-4 w-full animate-pulse rounded-full bg-white/65 dark:bg-slate-700/50" />
-        <div class="h-4 w-3/4 animate-pulse rounded-full bg-white/60 dark:bg-slate-700/45" />
-      </div>
+    <section v-if="pending" class="studio-list mt-8">
+      <div v-for="idx in 3" :key="idx" class="studio-panel h-32 animate-pulse" />
     </section>
 
     <TransitionGroup
       v-else-if="filteredPosts.length"
       name="post-list"
       tag="section"
-      class="glass-shell glass-stack"
+      class="studio-list mt-8"
     >
       <NuxtLink
-        v-for="post in filteredPosts"
+        v-for="(post, index) in filteredPosts"
         :key="post.stem || post.path"
         :to="resolvePostTo(post)"
-        class="glass-row"
+        class="studio-item group"
       >
-        <div class="flex items-start justify-between gap-3">
-          <h2 class="text-lg font-semibold tracking-tight text-slate-900 sm:text-xl dark:text-white">
-            {{ post.title }}
-          </h2>
-          <AppIcon name="arrow-up-right" class="glass-row-arrow mt-1 h-4 w-4 shrink-0" />
+        <div class="grid gap-4 sm:grid-cols-[4.5rem_1fr_auto] sm:items-start">
+          <div class="studio-item-index text-sm font-semibold">
+            {{ String(index + 1).padStart(2, "0") }}
+          </div>
+
+          <div>
+            <h2 class="text-xl font-semibold leading-tight text-slate-950 sm:text-2xl dark:text-white">
+              {{ post.title }}
+            </h2>
+            <p class="mt-3 text-sm leading-7 text-slate-600 sm:text-base dark:text-slate-300">
+              {{ post.description }}
+            </p>
+          </div>
+
+          <AppIcon
+            name="arrow-up-right"
+            class="h-5 w-5 text-slate-400 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary"
+          />
         </div>
 
-        <p class="mt-2 text-sm text-slate-500 sm:text-base dark:text-slate-300">
-          {{ post.description }}
-        </p>
-
-        <div class="mt-3 flex flex-wrap items-center gap-2">
-          <span class="text-xs uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
+        <div class="mt-5 flex flex-wrap items-center gap-2 sm:pl-[5.5rem]">
+          <span class="mr-2 text-xs font-medium text-slate-500 dark:text-slate-400">
             {{ formatDate(post.date) }}
           </span>
-
-          <span v-for="tag in post.tags" :key="`${post.path}-${tag}`" class="glass-chip">
+          <span v-for="tag in post.tags" :key="`${post.path}-${tag}`" class="studio-chip">
             {{ tag }}
           </span>
         </div>
@@ -116,7 +125,7 @@ function formatDate(value?: string) {
 
     <section
       v-else
-      class="glass-shell glass-empty p-10 text-center text-base text-slate-600 dark:text-slate-300"
+      class="studio-panel mt-8 p-10 text-center text-base text-slate-600 dark:text-slate-300"
     >
       还没有匹配的文章，试试切换其他标签。
     </section>
@@ -127,14 +136,17 @@ function formatDate(value?: string) {
 .post-list-enter-active,
 .post-list-leave-active,
 .post-list-move {
-  transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  transition:
+    opacity 0.36s ease,
+    filter 0.4s ease,
+    transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .post-list-enter-from,
 .post-list-leave-to {
   opacity: 0;
-  filter: blur(4px);
-  transform: translateY(12px) scale(0.98);
+  filter: blur(6px);
+  transform: translateY(18px);
 }
 
 .post-list-leave-active {

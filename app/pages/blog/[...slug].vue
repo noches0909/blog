@@ -65,38 +65,41 @@ useSeoMeta({
 
 <template>
   <PageShell width="md">
-    <header class="glass-shell p-5 sm:p-6">
+    <header class="studio-header">
       <NuxtLink
         to="/blog"
-        class="inline-flex items-center gap-2 text-sm text-slate-500 transition hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200"
+        class="studio-back-link text-sm"
       >
         <AppIcon name="arrow-left" class="h-4 w-4" />
         返回列表
       </NuxtLink>
 
-      <h1 class="mt-4 text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl dark:text-white">
-        {{ articleData.title }}
-      </h1>
-      <p class="mt-2 text-base leading-relaxed text-slate-600 dark:text-slate-300">
-        {{ articleData.description }}
-      </p>
+      <div>
+        <p class="studio-kicker">Article</p>
+        <h1 class="mt-3 text-3xl font-semibold leading-tight text-slate-950 sm:text-5xl dark:text-white">
+          {{ articleData.title }}
+        </h1>
+        <p class="studio-copy mt-4">
+          {{ articleData.description }}
+        </p>
+      </div>
 
-      <div class="mt-4 flex flex-wrap items-center gap-2">
-        <span class="text-xs uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="mr-2 text-xs font-medium text-slate-500 dark:text-slate-400">
           发布于 {{ formatDate(articleData.date) }}
         </span>
-        <span v-for="tag in articleData.tags || []" :key="tag" class="glass-chip">
+        <span v-for="tag in articleData.tags || []" :key="tag" class="studio-chip">
           {{ tag }}
         </span>
       </div>
     </header>
 
-    <article class="glass-doc rich-text mt-5 px-4 py-6 sm:px-7 sm:py-8">
+    <article class="studio-panel rich-text mt-8 px-5 py-7 sm:px-8 sm:py-9">
       <ContentRenderer :value="articleData" prose />
     </article>
 
-    <footer class="glass-nav-grid mt-6 md:grid-cols-2">
-      <NuxtLink v-if="previousArticle" :to="resolveArticleTo(previousArticle.path)" class="glass-nav-link">
+    <footer class="mt-6 grid gap-3 md:grid-cols-2">
+      <NuxtLink v-if="previousArticle" :to="resolveArticleTo(previousArticle.path)" class="studio-item">
         <div class="text-sm text-slate-500 dark:text-slate-400">上一篇</div>
         <div class="mt-1 font-medium text-slate-900 dark:text-white">
           {{ previousArticle.title }}
@@ -104,7 +107,7 @@ useSeoMeta({
       </NuxtLink>
       <div v-else class="hidden md:block" />
 
-      <NuxtLink v-if="nextArticle" :to="resolveArticleTo(nextArticle.path)" class="glass-nav-link">
+      <NuxtLink v-if="nextArticle" :to="resolveArticleTo(nextArticle.path)" class="studio-item">
         <div class="text-sm text-slate-500 dark:text-slate-400">下一篇</div>
         <div class="mt-1 font-medium text-slate-900 dark:text-white">{{ nextArticle.title }}</div>
       </NuxtLink>
