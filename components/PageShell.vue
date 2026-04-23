@@ -18,14 +18,14 @@ const containerClass = computed(() => WIDTH_CLASS[props.width])
 </script>
 
 <template>
-  <div class="glass-page px-4 pt-10 pb-28 sm:py-14">
-    <div class="glass-backdrop">
-      <div class="glass-orb glass-orb-left" />
-      <div class="glass-orb glass-orb-right" />
-      <div class="glass-grid" />
+  <div class="studio-page px-4 pt-20 pb-28 sm:px-6 sm:pt-24 sm:pb-32">
+    <div class="studio-backdrop">
+      <div class="studio-aurora" />
+      <div class="studio-grid" />
+      <div class="studio-noise" />
     </div>
 
-    <div :class="['relative z-10 mx-auto w-full', containerClass]">
+    <div :class="['studio-frame relative z-10 mx-auto w-full', containerClass]">
       <slot />
     </div>
   </div>
