@@ -22,9 +22,9 @@ import avatarUrl from "~/assets/image/avatar.png"
 
       <h1 class="text-2xl font-bold sm:text-3xl md:text-6xl dark:text-white">Noland Cheng</h1>
 
-      <div class="max-w-3xl py-2 font-extralight md:text-3xl dark:text-neutral-200">
-        <p class="text-base md:text-2xl">涓流虽寡，浸成江河；爝火虽微，卒能燎野。</p>
-        <p class="text-sm md:text-xl">
+      <div class="max-w-3xl py-2 md:text-3xl dark:text-neutral-200">
+        <p class="text-base font-normal md:text-2xl">涓流虽寡，浸成江河；爝火虽微，卒能燎野。</p>
+        <p class="text-sm font-light md:text-xl">
           Tiny streams converge to form vast rivers, and a little spark can light the field.
         </p>
       </div>
