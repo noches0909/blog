@@ -20,7 +20,7 @@ function formatDate(value?: string) {
 <template>
   <PageShell width="lg">
     <header class="studio-header">
-      <p class="studio-kicker">Life Notes</p>
+      <p class="studio-kicker">Notes</p>
       <div class="grid gap-5 md:grid-cols-[1fr_18rem] md:items-end">
         <h1 class="studio-title">杂记</h1>
         <p class="studio-copy md:pb-2">

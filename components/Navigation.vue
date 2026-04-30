@@ -112,6 +112,7 @@ function resolveOrbitStyle(index: number) {
   width: 7.45rem;
   min-width: 0;
   height: 2.85rem;
+  align-items: center;
   justify-content: flex-start;
   gap: 0.58rem;
   border: 1px solid transparent;
@@ -119,7 +120,7 @@ function resolveOrbitStyle(index: number) {
   background: transparent;
   padding-inline: 0.88rem;
   color: rgb(51 65 85 / 0.74);
-  font-size: 0.95rem;
+  font-size: 1.05rem;
   font-weight: 650;
   opacity: var(--orbit-opacity);
   box-shadow: none;
@@ -134,17 +135,37 @@ function resolveOrbitStyle(index: number) {
     transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.navigation-orbit__item:hover {
-  background: rgb(255 255 255 / 0.38);
+.navigation-orbit__item::before {
+  content: "";
+  position: absolute;
+  inset: 0.22rem 0.64rem 0.22rem -2.85rem;
+  z-index: -1;
+  border-radius: 0 999px 999px 0;
+  background: var(--primary);
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition:
+    opacity 0.24s ease,
+    transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.navigation-orbit__item:not(.navigation-orbit__item--active):hover {
+  background: transparent;
   color: rgb(15 23 42);
   opacity: 1;
   transform: translate(calc(var(--orbit-x) + 0.18rem), calc(-50% + var(--orbit-y))) scale(var(--orbit-scale));
 }
 
 .navigation-orbit__item--active {
-  border-color: color-mix(in oklab, var(--primary) 34%, transparent);
-  background: color-mix(in oklab, var(--primary) 12%, white 88%);
-  color: rgb(15 23 42);
+  border-color: transparent;
+  background: transparent;
+  color: white;
+}
+
+.navigation-orbit__item--active::before {
+  opacity: 1;
+  transform: scaleX(1);
 }
 
 .dark .navigation-orbit__arc {
@@ -159,38 +180,49 @@ function resolveOrbitStyle(index: number) {
   color: rgb(203 213 225 / 0.7);
 }
 
-.dark .navigation-orbit__item:hover {
-  background: rgb(15 23 42 / 0.42);
+.dark .navigation-orbit__item:not(.navigation-orbit__item--active):hover {
+  background: transparent;
   color: white;
 }
 
 .dark .navigation-orbit__item--active {
-  border-color: color-mix(in oklab, var(--primary) 38%, transparent);
-  background: color-mix(in oklab, var(--primary) 18%, rgb(15 23 42) 82%);
+  border-color: transparent;
+  background: transparent;
   color: white;
 }
 
-@media (max-width: 767px) {
+.dark .navigation-orbit__item::before {
+  background: var(--primary);
+}
+
+@media (max-width: 1199px) {
   .navigation-orbit {
     top: auto;
     bottom: 0.75rem;
     left: 50%;
     width: min(24rem, calc(100% - 1rem));
-    height: 4.75rem;
+    height: 4.2rem;
     transform: translateX(-50%);
   }
 
   .navigation-orbit__arc {
     inset: auto 0 0;
     width: 100%;
-    height: 4.75rem;
+    height: 4.2rem;
     border: 1px solid rgb(100 116 139 / 0.14);
     border-bottom: 0;
-    border-radius: 999px 999px 0 0;
+    border-radius: 2.2rem 2.2rem 0 0;
     background:
       radial-gradient(ellipse at center bottom, rgb(255 255 255 / 0.46), transparent 70%),
       linear-gradient(180deg, rgb(255 255 255 / 0.34), rgb(255 255 255 / 0.1));
     transform: none;
+  }
+
+  .dark .navigation-orbit__arc {
+    border-color: rgb(148 163 184 / 0.16);
+    background:
+      radial-gradient(ellipse at center bottom, rgb(15 23 42 / 0.56), transparent 70%),
+      linear-gradient(180deg, rgb(15 23 42 / 0.46), rgb(15 23 42 / 0.16));
   }
 
   .navigation-orbit__items {
@@ -198,7 +230,7 @@ function resolveOrbitStyle(index: number) {
     grid-template-columns: repeat(5, minmax(0, 1fr));
     align-items: end;
     gap: 0.1rem;
-    padding: 0.8rem 0.5rem 0.45rem;
+    padding: 0.58rem 0.5rem 0.42rem;
   }
 
   .navigation-orbit__item,
@@ -207,16 +239,26 @@ function resolveOrbitStyle(index: number) {
     z-index: auto;
     width: 100%;
     height: 3.1rem;
+    align-items: center;
     flex-direction: column;
     justify-content: center;
     gap: 0.18rem;
     padding-inline: 0.25rem;
-    font-size: 0.72rem;
+    font-size: 0.78rem;
     opacity: 1;
     transform: none;
   }
 
-  .navigation-orbit__item:hover {
+  .navigation-orbit__item::before {
+    content: none;
+  }
+
+  .navigation-orbit__item--active {
+    background: var(--primary);
+    color: white;
+  }
+
+  .navigation-orbit__item:not(.navigation-orbit__item--active):hover {
     transform: translateY(-0.08rem);
   }
 }
