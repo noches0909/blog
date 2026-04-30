@@ -12,6 +12,18 @@ const blog = defineCollection({
   }),
 })
 
+const notes = defineCollection({
+  type: "page",
+  source: "notes/**/*.md",
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    date: z.string(),
+    tags: z.array(z.string()).default([]),
+    draft: z.boolean().default(false),
+  }),
+})
+
 const project = defineCollection({
   type: "page",
   source: "project/**/*.md",
@@ -20,6 +32,7 @@ const project = defineCollection({
 export default defineContentConfig({
   collections: {
     blog,
+    notes,
     project,
   },
 })

@@ -10,7 +10,7 @@
           as-child
           variant="outline"
           size="icon"
-          class="rounded-xl bg-white/80 backdrop-blur-sm dark:bg-slate-900/70"
+          class="rounded-xl bg-white/80 backdrop-blur-sm transition hover:-translate-y-0.5 hover:border-primary/60 hover:bg-white/90 hover:text-primary dark:bg-slate-900/70 dark:hover:bg-slate-900/86"
         >
           <a
             href="https://github.com/noches0909"

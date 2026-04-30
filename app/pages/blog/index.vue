@@ -1,6 +1,6 @@
 <script setup lang="ts">
 useSeoMeta({
-  title: "博客",
+  title: "全栈沉沦录",
   description: "记录 Nuxt、前端工程和产品实现过程中的思考。",
 })
 
@@ -52,7 +52,7 @@ function formatDate(value?: string) {
     <header class="studio-header">
       <p class="studio-kicker">Blog</p>
       <div class="grid gap-5 md:grid-cols-[1fr_18rem] md:items-end">
-        <h1 class="studio-title">文章索引</h1>
+        <h1 class="studio-title">全栈沉沦录</h1>
         <p class="studio-copy md:pb-2">
           记录 Nuxt、前端工程和产品实现过程中的思考。保留简洁的入口，但让每篇文章像一条可以展开的线索。
         </p>

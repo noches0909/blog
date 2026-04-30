@@ -3,6 +3,7 @@ type AppIconName =
   | "arrow-left"
   | "arrow-right"
   | "arrow-up-right"
+  | "coffee"
   | "folder-git-2"
   | "github"
   | "house"
@@ -18,6 +19,8 @@ const ICONS: Record<AppIconName, string> = {
     '<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7-7l7 7l-7 7" />',
   "arrow-up-right":
     '<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h10v10M7 17L17 7" />',
+  coffee:
+    '<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M10 2v2m4-2v2" /><path d="M16 8H4v8a4 4 0 0 0 4 4h4a4 4 0 0 0 4-4Z" /><path d="M16 9h2a3 3 0 0 1 0 6h-2" /><path d="M6 22h12" /></g>',
   "folder-git-2":
     '<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M18 19a5 5 0 0 1-5-5v8" /><path d="M9 20H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H20a2 2 0 0 1 2 2v5" /><circle cx="13" cy="12" r="2" /><circle cx="20" cy="19" r="2" /></g>',
   github:
