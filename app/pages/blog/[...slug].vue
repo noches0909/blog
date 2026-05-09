@@ -76,7 +76,7 @@ useSeoMeta({
 
       <div>
         <p class="studio-kicker">Article</p>
-        <h1 class="mt-3 text-3xl font-semibold leading-tight text-slate-950 sm:text-5xl dark:text-white">
+        <h1 class="theme-heading mt-3 text-3xl font-semibold leading-tight sm:text-5xl">
           {{ articleData.title }}
         </h1>
         <p class="studio-copy mt-4">
@@ -85,7 +85,7 @@ useSeoMeta({
       </div>
 
       <div class="flex flex-wrap items-center gap-2">
-        <span class="mr-2 text-xs font-medium text-slate-500 dark:text-slate-400">
+        <span class="theme-muted mr-2 text-xs font-medium">
           发布于 {{ formatDate(articleData.date) }}
         </span>
         <span v-for="tag in articleData.tags || []" :key="tag" class="studio-chip">
@@ -100,16 +100,16 @@ useSeoMeta({
 
     <footer class="mt-6 grid gap-3 md:grid-cols-2">
       <NuxtLink v-if="previousArticle" :to="resolveArticleTo(previousArticle.path)" class="studio-item">
-        <div class="text-sm text-slate-500 dark:text-slate-400">上一篇</div>
-        <div class="mt-1 font-medium text-slate-900 dark:text-white">
+        <div class="theme-muted text-sm">上一篇</div>
+        <div class="theme-heading mt-1 font-medium">
           {{ previousArticle.title }}
         </div>
       </NuxtLink>
       <div v-else class="hidden md:block" />
 
       <NuxtLink v-if="nextArticle" :to="resolveArticleTo(nextArticle.path)" class="studio-item">
-        <div class="text-sm text-slate-500 dark:text-slate-400">下一篇</div>
-        <div class="mt-1 font-medium text-slate-900 dark:text-white">{{ nextArticle.title }}</div>
+        <div class="theme-muted text-sm">下一篇</div>
+        <div class="theme-heading mt-1 font-medium">{{ nextArticle.title }}</div>
       </NuxtLink>
     </footer>
   </PageShell>

@@ -87,13 +87,15 @@ function resolveOrbitStyle(index: number) {
   top: 50%;
   width: 17.9rem;
   height: 17.9rem;
-  border: 1px solid rgb(100 116 139 / 0.18);
+  border: 1px solid var(--line);
   border-left: 0;
   border-radius: 0 999px 999px 0;
   background:
-    radial-gradient(circle at left center, rgb(255 255 255 / 0.26), transparent 62%),
-    linear-gradient(90deg, rgb(255 255 255 / 0.42), rgb(255 255 255 / 0.1));
-  box-shadow: inset -1px 0 0 rgb(255 255 255 / 0.46);
+    linear-gradient(90deg, var(--surface), color-mix(in oklab, var(--surface) 42%, transparent)),
+    linear-gradient(180deg, color-mix(in oklab, var(--primary) 8%, transparent), transparent);
+  box-shadow:
+    inset -1px 0 0 color-mix(in oklab, var(--primary) 18%, transparent),
+    0 28px 60px -48px var(--theme-shadow);
   transform: translateY(-50%);
   backdrop-filter: blur(14px) saturate(1.04);
 }
@@ -119,7 +121,7 @@ function resolveOrbitStyle(index: number) {
   border-radius: 999px;
   background: transparent;
   padding-inline: 0.88rem;
-  color: rgb(51 65 85 / 0.74);
+  color: var(--text-soft);
   font-size: 1.05rem;
   font-weight: 650;
   opacity: var(--orbit-opacity);
@@ -152,7 +154,7 @@ function resolveOrbitStyle(index: number) {
 
 .navigation-orbit__item:not(.navigation-orbit__item--active):hover {
   background: transparent;
-  color: rgb(15 23 42);
+  color: var(--foreground);
   opacity: 1;
   transform: translate(calc(var(--orbit-x) + 0.18rem), calc(-50% + var(--orbit-y))) scale(var(--orbit-scale));
 }
@@ -160,39 +162,12 @@ function resolveOrbitStyle(index: number) {
 .navigation-orbit__item--active {
   border-color: transparent;
   background: transparent;
-  color: white;
+  color: var(--primary-foreground);
 }
 
 .navigation-orbit__item--active::before {
   opacity: 1;
   transform: scaleX(1);
-}
-
-.dark .navigation-orbit__arc {
-  border-color: rgb(148 163 184 / 0.14);
-  background:
-    radial-gradient(circle at left center, rgb(15 23 42 / 0.3), transparent 62%),
-    linear-gradient(90deg, rgb(15 23 42 / 0.42), rgb(15 23 42 / 0.08));
-  box-shadow: inset -1px 0 0 rgb(148 163 184 / 0.12);
-}
-
-.dark .navigation-orbit__item {
-  color: rgb(203 213 225 / 0.7);
-}
-
-.dark .navigation-orbit__item:not(.navigation-orbit__item--active):hover {
-  background: transparent;
-  color: white;
-}
-
-.dark .navigation-orbit__item--active {
-  border-color: transparent;
-  background: transparent;
-  color: white;
-}
-
-.dark .navigation-orbit__item::before {
-  background: var(--primary);
 }
 
 @media (max-width: 1199px) {
@@ -209,20 +184,13 @@ function resolveOrbitStyle(index: number) {
     inset: auto 0 0;
     width: 100%;
     height: 4.2rem;
-    border: 1px solid rgb(100 116 139 / 0.14);
+    border: 1px solid var(--line);
     border-bottom: 0;
     border-radius: 2.2rem 2.2rem 0 0;
     background:
-      radial-gradient(ellipse at center bottom, rgb(255 255 255 / 0.46), transparent 70%),
-      linear-gradient(180deg, rgb(255 255 255 / 0.34), rgb(255 255 255 / 0.1));
+      linear-gradient(180deg, var(--surface), color-mix(in oklab, var(--surface) 42%, transparent)),
+      linear-gradient(90deg, color-mix(in oklab, var(--primary) 8%, transparent), transparent);
     transform: none;
-  }
-
-  .dark .navigation-orbit__arc {
-    border-color: rgb(148 163 184 / 0.16);
-    background:
-      radial-gradient(ellipse at center bottom, rgb(15 23 42 / 0.56), transparent 70%),
-      linear-gradient(180deg, rgb(15 23 42 / 0.46), rgb(15 23 42 / 0.16));
   }
 
   .navigation-orbit__items {
@@ -255,7 +223,7 @@ function resolveOrbitStyle(index: number) {
 
   .navigation-orbit__item--active {
     background: var(--primary);
-    color: white;
+    color: var(--primary-foreground);
   }
 
   .navigation-orbit__item:not(.navigation-orbit__item--active):hover {

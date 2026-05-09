@@ -14,7 +14,6 @@
     "deps:update": "bun update -i"
   },
   "dependencies": {
-    "@inspira-ui/plugins": "^0.0.2",
     "@nuxt/content": "3.13.0",
     "@nuxtjs/color-mode": "^4.0.0",
     "@vueuse/core": "^14.2.1",

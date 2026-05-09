@@ -11,6 +11,7 @@ type AppIconName =
   | "notebook-tabs"
   | "sun"
   | "user-round"
+  | "x"
 
 const ICONS: Record<AppIconName, string> = {
   "arrow-left":
@@ -35,6 +36,8 @@ const ICONS: Record<AppIconName, string> = {
     '<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="12" r="4" /><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" /></g>',
   "user-round":
     '<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="8" r="5" /><path d="M20 21a8 8 0 0 0-16 0" /></g>',
+  x:
+    '<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 6 6 18M6 6l12 12" />',
 }
 
 const props = defineProps<{

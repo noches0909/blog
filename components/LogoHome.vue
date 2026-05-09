@@ -12,7 +12,7 @@ const iconSrc = computed(() => `${runtimeConfig.app.baseURL}favicon.ico`)
       height="32"
       loading="eager"
       decoding="async"
-      class="h-8 w-8 rounded shadow-sm transition-transform duration-200 group-hover:scale-110"
+      class="h-8 w-8 rounded-[0.35rem] border border-border bg-card shadow-sm transition-transform duration-200 group-hover:scale-110"
     />
   </NuxtLink>
 </template>

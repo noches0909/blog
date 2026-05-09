@@ -59,7 +59,7 @@ useSeoMeta({
 
       <div>
         <p class="studio-kicker">Project Note</p>
-        <h1 class="mt-3 text-4xl font-semibold leading-none text-slate-950 sm:text-6xl dark:text-white">
+        <h1 class="theme-heading mt-3 text-4xl font-semibold leading-none sm:text-6xl">
           {{ projectMeta.title }}
         </h1>
         <p class="studio-copy mt-4">

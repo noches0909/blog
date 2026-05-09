@@ -66,7 +66,7 @@ function formatDate(value?: string) {
           variant="ghost"
           :class="[
             'studio-filter h-9 px-4',
-            activeTag === tag && 'studio-filter-active hover:bg-primary hover:text-white',
+            activeTag === tag && 'studio-filter-active !text-primary-foreground hover:!bg-primary hover:!text-primary-foreground',
           ]"
           :aria-pressed="activeTag === tag"
           @click="activeTag = tag"
@@ -98,22 +98,22 @@ function formatDate(value?: string) {
           </div>
 
           <div>
-            <h2 class="text-xl font-semibold leading-tight text-slate-950 sm:text-2xl dark:text-white">
+            <h2 class="theme-heading text-xl font-semibold leading-tight sm:text-2xl">
               {{ post.title }}
             </h2>
-            <p class="mt-3 text-sm leading-7 text-slate-600 sm:text-base dark:text-slate-300">
+            <p class="theme-copy mt-3 text-sm leading-7 sm:text-base">
               {{ post.description }}
             </p>
           </div>
 
           <AppIcon
             name="arrow-up-right"
-            class="h-5 w-5 text-slate-400 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary"
+            class="theme-muted h-5 w-5 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary"
           />
         </div>
 
         <div class="mt-5 flex flex-wrap items-center gap-2 sm:pl-[5.5rem]">
-          <span class="mr-2 text-xs font-medium text-slate-500 dark:text-slate-400">
+          <span class="theme-muted mr-2 text-xs font-medium">
             {{ formatDate(post.date) }}
           </span>
           <span v-for="tag in post.tags" :key="`${post.path}-${tag}`" class="studio-chip">
@@ -125,7 +125,7 @@ function formatDate(value?: string) {
 
     <section
       v-else
-      class="studio-panel mt-8 p-10 text-center text-base text-slate-600 dark:text-slate-300"
+      class="studio-panel theme-copy mt-8 p-10 text-center text-base"
     >
       还没有匹配的文章，试试切换其他标签。
     </section>

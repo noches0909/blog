@@ -39,7 +39,7 @@ const projects = [
           <div class="flex items-start justify-between gap-4">
             <div>
               <p class="studio-kicker">Active Repository</p>
-              <h2 class="mt-3 text-3xl font-semibold leading-none text-slate-950 sm:text-5xl dark:text-white">
+              <h2 class="theme-heading mt-3 text-3xl font-semibold leading-none sm:text-5xl">
                 {{ project.name }}
               </h2>
             </div>
@@ -47,7 +47,7 @@ const projects = [
           </div>
 
           <div>
-            <p class="max-w-xl text-base leading-8 text-slate-600 dark:text-slate-300">
+            <p class="theme-copy max-w-xl text-base leading-8">
               {{ project.description }}
             </p>
 
@@ -59,7 +59,7 @@ const projects = [
           </div>
 
           <div
-            class="inline-flex items-center gap-2 text-sm font-semibold text-slate-700 transition group-hover:text-primary dark:text-slate-300"
+            class="theme-copy inline-flex items-center gap-2 text-sm font-semibold transition group-hover:text-primary"
           >
             {{ project.cta }}
             <AppIcon name="arrow-right" class="h-4 w-4 transition group-hover:translate-x-1" />
@@ -71,22 +71,22 @@ const projects = [
         <div class="relative z-10 flex h-full min-h-64 flex-col justify-between gap-8">
           <div>
             <p class="studio-kicker">Signal</p>
-            <p class="mt-4 text-2xl font-semibold leading-tight text-slate-950 dark:text-white">
+            <p class="theme-heading mt-4 text-2xl font-semibold leading-tight">
               文档与项目保持同步，减少手动维护的断层。
             </p>
           </div>
           <div class="grid grid-cols-3 gap-2 text-center">
-            <div class="border border-slate-300/40 bg-white/30 p-3 dark:border-slate-500/20 dark:bg-slate-900/24">
-              <div class="text-xl font-semibold text-slate-950 dark:text-white">01</div>
-              <div class="text-xs text-slate-500 dark:text-slate-400">维护中</div>
+            <div class="theme-stat">
+              <div class="theme-heading text-xl font-semibold">01</div>
+              <div class="theme-muted text-xs">维护中</div>
             </div>
-            <div class="border border-slate-300/40 bg-white/30 p-3 dark:border-slate-500/20 dark:bg-slate-900/24">
-              <div class="text-xl font-semibold text-slate-950 dark:text-white">Nuxt</div>
-              <div class="text-xs text-slate-500 dark:text-slate-400">主栈</div>
+            <div class="theme-stat">
+              <div class="theme-heading text-xl font-semibold">Nuxt</div>
+              <div class="theme-muted text-xs">主栈</div>
             </div>
-            <div class="border border-slate-300/40 bg-white/30 p-3 dark:border-slate-500/20 dark:bg-slate-900/24">
-              <div class="text-xl font-semibold text-slate-950 dark:text-white">Docs</div>
-              <div class="text-xs text-slate-500 dark:text-slate-400">驱动</div>
+            <div class="theme-stat">
+              <div class="theme-heading text-xl font-semibold">Docs</div>
+              <div class="theme-muted text-xs">驱动</div>
             </div>
           </div>
         </div>

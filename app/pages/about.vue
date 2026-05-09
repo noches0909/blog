@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import avatarUrl from "~/assets/image/avatar.png"
-
 useSeoMeta({
   title: "关于",
   description: "关于 Noland Cheng 和当前关注方向的简要介绍。",
@@ -11,25 +9,13 @@ useSeoMeta({
   <PageShell width="md">
     <article class="about-essay">
       <header class="text-center">
-        <Avatar
-          class="mx-auto h-20 w-20 border border-white/70 shadow-lg sm:h-24 sm:w-24 dark:border-slate-600/40"
-          style="width: 6rem; height: 6rem;"
-        >
-          <AvatarImage
-            :src="avatarUrl"
-            alt="Noland Cheng"
-            loading="eager"
-            decoding="async"
-            class="object-cover object-top"
-          />
-          <AvatarFallback>NC</AvatarFallback>
-        </Avatar>
+        <ThemeAvatar class="mx-auto h-20 w-20 sm:h-24 sm:w-24" />
 
         <p class="studio-kicker mt-7">About</p>
-        <h1 class="mt-4 text-4xl font-semibold leading-none text-slate-950 sm:text-6xl dark:text-white">
+        <h1 class="theme-heading mt-4 text-4xl font-semibold leading-none sm:text-6xl">
           关于我
         </h1>
-        <p class="mx-auto mt-5 max-w-xl text-base leading-8 text-slate-600 dark:text-slate-300">
+        <p class="theme-copy mx-auto mt-5 max-w-xl text-base leading-8">
           我想把这里留给一些更慢、更诚实的话。
         </p>
       </header>

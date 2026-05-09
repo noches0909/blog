@@ -41,17 +41,17 @@ function formatDate(value?: string) {
           </div>
 
           <div>
-            <h2 class="text-xl font-semibold leading-tight text-slate-950 sm:text-2xl dark:text-white">
+            <h2 class="theme-heading text-xl font-semibold leading-tight sm:text-2xl">
               {{ note.title }}
             </h2>
-            <p class="mt-3 text-sm leading-7 text-slate-600 sm:text-base dark:text-slate-300">
+            <p class="theme-copy mt-3 text-sm leading-7 sm:text-base">
               {{ note.description }}
             </p>
           </div>
         </div>
 
         <div class="mt-5 flex flex-wrap items-center gap-2 sm:pl-[5.5rem]">
-          <span class="mr-2 text-xs font-medium text-slate-500 dark:text-slate-400">
+          <span class="theme-muted mr-2 text-xs font-medium">
             {{ formatDate(note.date) }}
           </span>
           <span v-for="tag in note.tags" :key="`${note.path}-${tag}`" class="studio-chip">
@@ -61,7 +61,7 @@ function formatDate(value?: string) {
       </article>
     </section>
 
-    <section class="studio-panel mt-8 p-10 text-center text-base text-slate-600 dark:text-slate-300" v-else>
+    <section class="studio-panel theme-copy mt-8 p-10 text-center text-base" v-else>
       这里先空着。之后把杂记文章放进 <code>content/notes</code> 就会显示在这里。
     </section>
   </PageShell>
